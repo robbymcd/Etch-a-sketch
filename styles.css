@@ -1,0 +1,125 @@
+body {
+    height: fit-content;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #dbeafe;    
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: #1e3a8a;
+    height: 20%;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+    justify-content: center;
+}
+
+.draw-select {
+    display: flex;
+    width: 20%;
+    height: 100%;
+    margin: 2rem;
+    margin-top: 0px;
+    justify-self: center;
+}
+
+.draw-grid {
+    display: grid;
+    margin: 1.2rem;
+    height: 500px;
+    width: 500px;
+    background-color: white;
+    box-shadow: 0 0 4px -1px;
+    align-self: center;
+}
+
+.grid-element {
+    user-select: none;
+}
+
+button {
+    font-family: 'Crimson Text', sans-serif;
+    height: 50px;
+    width: 200px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #dbeafe;
+    color: #1e3a8a;
+    border: 2px solid #1e3a8a;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.selected {
+    background-color: #1e3a8a;
+    color: #dbeafe;
+}
+
+
+
+ul li {
+    border-radius: 10px;
+    border: #1e3a8a;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+#slider {
+    -webkit-appearance: none;
+    width: 100%;
+    border-radius: 25px;
+    background-color: #eff6ff;
+    box-shadow: 0 0 3px -1px;
+    height: 20px;
+    color: #1e3a8a;
+}
+
+.main ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.main li {
+    margin: .5rem;
+}
+
+.main li p {
+    font-family: 'Crimson Text', sans-serif;
+    font-size: 1.3rem;
+    color: #1e3a8a;
+    font-weight: bolder;
+    text-align: center;
+}
+
+@media (max-width: 780px) {
+    .main {
+        flex-direction: column;
+    }
+    .draw-select {
+        justify-content: center;
+        width: 100%;
+        margin: 0px;
+    }
+    
+    .draw-area {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .title {
+        text-align: center;
+    }
+}
