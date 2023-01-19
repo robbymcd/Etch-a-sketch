@@ -42,14 +42,12 @@ function setupGrid(size) {
       grid.appendChild(gridElement);
     }
     gridElements = document.querySelectorAll('.grid-element');
-
     if (regularModeButton.classList.contains('selected')) {
         regularMode();
     } else if (rainbowModeButton.classList.contains('selected')) {
         rainbowMode();
     } else if (eraserButton.classList.contains('selected')) {
         eraseGrid();
-    }
 }
 
 setupGrid(16);

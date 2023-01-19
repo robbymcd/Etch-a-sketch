@@ -14,13 +14,14 @@ rainbowModeButton.addEventListener('click', rainbowMode);
 const eraserButton = document.querySelector('#eraser');
 eraserButton.addEventListener('click', eraseGrid);
 let mouseDown = false;
-document.body.onmousedown = () => (mouseDown = true);
+document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false);
 let touchDown = false;
 document.body.ontouchstart = () => (touchDown = true);
 document.body.ontouchend = () => (touchDown = false);
 //add an event listener to slider that runs the slider function
 const slider = document.querySelector('#slider');
+slider.addEventListener('input', sliderFunction);
 //display the value of the slider in #dimensions
 slider.oninput = function() {
     document.getElementById('dimensions').innerHTML = this.value + ' x ' + this.value;
@@ -42,14 +43,6 @@ function setupGrid(size) {
       grid.appendChild(gridElement);
     }
     gridElements = document.querySelectorAll('.grid-element');
-
-    if (regularModeButton.classList.contains('selected')) {
-        regularMode();
-    } else if (rainbowModeButton.classList.contains('selected')) {
-        rainbowMode();
-    } else if (eraserButton.classList.contains('selected')) {
-        eraseGrid();
-    }
 }
 
 setupGrid(16);
@@ -75,20 +68,10 @@ function regularMode() {
     }));
 
     //make the function run smooth on mobile 
-    //remove all other touch event listeners from the .draw-grid elements
-    //if the 
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', rainbowMode));
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', clearGrid));
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', eraseGrid));
     gridElements.forEach(gridElements => gridElements.addEventListener('touchstart', () => {
         gridElements.style.backgroundColor = 'black';
     }));
 
-    //touch move event listener
-    gridElements.forEach(gridElements => gridElements.addEventListener('touchmove', () => {
-        if (touchDown)
-            gridElements.style.backgroundColor = 'black';
-    }));
 }
 
 function rainbowMode() {
@@ -109,21 +92,6 @@ function rainbowMode() {
         if (mouseDown)
             gridElements.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
     }));
-    //make the function run smooth on mobile
-    //remove all other touch event listeners from the .draw-grid elements
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', regularMode));
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', clearGrid));
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', eraseGrid));
-    gridElements.forEach(gridElements => gridElements.addEventListener('touchstart', () => {
-        gridElements.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-    }
-    ));
-    //touch move event listener
-    gridElements.forEach(gridElements => gridElements.addEventListener('touchmove', () => {
-        if (touchDown)
-            gridElements.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-    }
-    ));
 }
 
 function eraseGrid() {
@@ -143,20 +111,16 @@ function eraseGrid() {
         if (mouseDown)
             gridElements.style.backgroundColor = 'white';
     }));
-    //make the function run smooth on mobile
-    //remove all other touch event listeners from the .draw-grid elements
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', regularMode));
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', clearGrid));
-    gridElements.forEach(gridElements => gridElements.removeEventListener('touchstart', rainbowMode));
-    gridElements.forEach(gridElements => gridElements.addEventListener('touchstart', () => {
-        gridElements.style.backgroundColor = 'white';
-    }
-    ));
-    //touch move event listener
-    gridElements.forEach(gridElements => gridElements.addEventListener('touchmove', () => {
-        if (touchDown)
-            gridElements.style.backgroundColor = 'white';
-    }
-    ));
 } 
-
+    
+function sliderFunction(size) {
+    clearGrid();
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+  
+    for (let i = 0; i < size * size; i++) {
+      const gridElement = document.createElement('div');
+      gridElement.classList.add('grid-element');
+      grid.appendChild(gridElement);
+    }
+}

@@ -21,6 +21,7 @@ document.body.ontouchstart = () => (touchDown = true);
 document.body.ontouchend = () => (touchDown = false);
 //add an event listener to slider that runs the slider function
 const slider = document.querySelector('#slider');
+slider.addEventListener('input', sliderFunction(size));
 //display the value of the slider in #dimensions
 slider.oninput = function() {
     document.getElementById('dimensions').innerHTML = this.value + ' x ' + this.value;
@@ -42,14 +43,6 @@ function setupGrid(size) {
       grid.appendChild(gridElement);
     }
     gridElements = document.querySelectorAll('.grid-element');
-
-    if (regularModeButton.classList.contains('selected')) {
-        regularMode();
-    } else if (rainbowModeButton.classList.contains('selected')) {
-        rainbowMode();
-    } else if (eraserButton.classList.contains('selected')) {
-        eraseGrid();
-    }
 }
 
 setupGrid(16);
@@ -159,4 +152,15 @@ function eraseGrid() {
     }
     ));
 } 
-
+    
+function sliderFunction(size) {
+    clearGrid();
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+  
+    for (let i = 0; i < size * size; i++) {
+      const gridElement = document.createElement('div');
+      gridElement.classList.add('grid-element');
+      grid.appendChild(gridElement);
+    }
+}

@@ -42,14 +42,6 @@ function setupGrid(size) {
       grid.appendChild(gridElement);
     }
     gridElements = document.querySelectorAll('.grid-element');
-
-    if (regularModeButton.classList.contains('selected')) {
-        regularMode();
-    } else if (rainbowModeButton.classList.contains('selected')) {
-        rainbowMode();
-    } else if (eraserButton.classList.contains('selected')) {
-        eraseGrid();
-    }
 }
 
 setupGrid(16);
@@ -159,4 +151,15 @@ function eraseGrid() {
     }
     ));
 } 
-
+    
+function sliderFunction(size) {
+    clearGrid();
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+  
+    for (let i = 0; i < size * size; i++) {
+      const gridElement = document.createElement('div');
+      gridElement.classList.add('grid-element');
+      grid.appendChild(gridElement);
+    }
+}
